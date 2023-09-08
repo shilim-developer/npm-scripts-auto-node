@@ -1,0 +1,118 @@
+{
+  "name": "npm-scripts-auto-node",
+  "displayName": "NPM Scripts Auto Node",
+  "description": "Npm scripts extension that can automatically switch Node versions",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.69.0"
+  },
+  "publisher": "shilim",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:./package.json"
+  ],
+  "main": "./out/extension.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shilim-developer/npm-scripts-auto-node"
+  },
+  "bugs": {
+    "url": "https://github.com/shilim-developer/npm-scripts-auto-node/issues",
+    "email": "1251314045@qq.com"
+  },
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "npm-scripts-auto-node.npmScripts",
+          "name": "NPM Scripts + Auto Node",
+          "when": "workspaceHasNodeConfigJSON"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "npm-scripts-auto-node.runNpmScript",
+        "title": "Run NPM script"
+      },
+      {
+        "command": "npm-scripts-auto-node.refreshScripts",
+        "title": "Refresh NPM Scripts",
+        "icon": "$(extensions-refresh)"
+      },
+      {
+        "command": "npm-scripts-auto-node.openTerminal",
+        "title": "openTerminal",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "npm-scripts-auto-node.runScripts",
+        "title": "runScripts",
+        "icon": "$(play)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "npm-scripts-auto-node.refreshScripts",
+          "when": "view == npm-scripts-auto-node.npmScripts",
+          "group": "navigation"
+        },
+        {
+          "command": "npm-scripts-auto-node.openTerminal",
+          "when": "view == npm-scripts-auto-node.npmScripts",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "npm-scripts-auto-node.runScripts",
+          "when": "view == npm-scripts-auto-node.npmScripts",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "icon": "resources/icon.png",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git",
+      "useEmoji": true
+    }
+  },
+  "scripts": {
+    "package": "vsce package --no-yarn",
+    "changelog": "conventional-changelog -p normal -i CHANGELOG.md -s -r 0",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "prepare": "husky install",
+    "commit": "git-cz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.69.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "@vscode/test-electron": "^2.1.3",
+    "commitizen": "^4.3.0",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-customizable": "^7.0.0",
+    "cz-git": "^1.7.1",
+    "eslint": "^8.16.0",
+    "glob": "^8.0.3",
+    "husky": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.2"
+  }
+}
